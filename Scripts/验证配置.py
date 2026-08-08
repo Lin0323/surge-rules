@@ -13,11 +13,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 RULES = ROOT / "Rules"
 MODULES = ROOT / "Modules"
+SCRIPTS = ROOT / "Scripts"
 MAIN = ROOT / "Config" / "Main.conf"
 NODES = ROOT / "Nodes"
 SUBSCRIPTION = ROOT / "Subscription"
 SERVER = ROOT / "Server"
-REQUIRED_SECTIONS = ("[General]", "[Proxy]", "[Proxy Group]", "[Rule]", "[DNS]", "[Script]", "[MITM]")
+REQUIRED_SECTIONS = ("[General]", "[Proxy]", "[Proxy Group]", "[Rule]", "[Panel]", "[Script]", "[MITM]")
 RULE_PREFIXES = {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "IP-CIDR", "IP-CIDR6", "GEOIP", "USER-AGENT", "URL-REGEX"}
 
 
@@ -62,6 +63,36 @@ def check_main(errors: list[str]) -> None:
     for item in forbidden:
         if item.casefold() in text.casefold():
             errors.append(f"主配置疑似包含敏感字段：{item}")
+    panel_line = re.search(r"^网络诊断\s*=.*script-name=NetworkDiagnosticsPanel.*update-interval=600", text, re.M)
+    if not panel_line:
+        errors.append("网络诊断 Panel 定义缺失或刷新周期不是 600 秒")
+    script_line = re.search(r"^NetworkDiagnosticsPanel\s*=.*Scripts/Panel\.js.*argument=proxy-group=Proxy", text, re.M)
+    if not script_line:
+        errors.append("网络诊断 Panel 脚本引用缺失或未显式使用 Proxy 策略组")
+    forbidden_general = ("hijack-dns", "fake-ip", "ipv6 = false", "internet-test-url")
+    for item in forbidden_general:
+        if item.casefold() in text.casefold():
+            errors.append(f"主配置包含不应由 Panel 引入的网络改动：{item}")
+
+
+def check_scripts(errors: list[str]) -> None:
+    panel = SCRIPTS / "Panel.js"
+    if not panel.is_file() or not panel.read_text(encoding="utf-8").strip():
+        errors.append("网络诊断 Panel 脚本缺失或为空：Scripts/Panel.js")
+        return
+    text = panel.read_text(encoding="utf-8")
+    required_tokens = (
+        "policy: proxyGroup",
+        "api.ip.sb/geoip",
+        "cp.cloudflare.com/generate_204",
+        "cloudflare-dns.com/dns-query",
+        "$persistentStore",
+        "$notification.post",
+        "$done({",
+    )
+    for token in required_tokens:
+        if token not in text:
+            errors.append(f"Panel 脚本缺少关键能力：{token}")
 
 
 def check_node_layer(errors: list[str]) -> None:
@@ -130,6 +161,7 @@ def main() -> int:
     check_rules(errors)
     check_modules(errors)
     check_main(errors)
+    check_scripts(errors)
     check_node_layer(errors)
     if not args.skip_urls:
         check_urls(errors)

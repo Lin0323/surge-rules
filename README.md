@@ -54,15 +54,23 @@ Server/ 的脚本默认不会覆盖 x-ui、Caddy、VLESS Reality 或已有端口
 
 VLESS Reality 保持现有配置，不由这些脚本修改；Surge iOS 没有 VLESS 策略类型，因此不会把它写进 Surge 订阅。
 
-## 网络诊断
+## 网络诊断 Panel
 
-在 Surge 的“脚本”页手动执行：
+`Config/Main.conf` 已内置名为“网络诊断”的动态 Panel，不需要日常进入“脚本”页。
 
-- 出口 IP 检查：出口 IP、国家、城市与 ASN。
-- 节点健康检查：Auto、Proxy、Backup 的可达性与延迟。
-- 网络信息：当前网络和直连基础连通性。
-- 服务连通性检查：ChatGPT、GitHub、YouTube 的可达性；不判断登录、区域资格或订阅权益。
-- 异常通知测试：DoH 探测失败时发送通知。
+- 显示：当前代理出口 IP/地区、最终策略或自动选路候选、Wi-Fi/Cellular、DNS 可达状态、节点连通、Google、TikTok、ChatGPT 与最后更新时间。
+- 刷新：轻触 Panel 的刷新按钮即并行执行完整检测；`update-interval=600`，在进入 Surge 策略选择页时最多每 10 分钟自动刷新一次。这是 Surge Panel 的官方刷新行为，不会在后台高频请求。
+- 代理路径：所有外部检测都显式指定 `Proxy` 策略组，不会因为脚本默认 DIRECT 而把本地运营商 IP 误报成代理出口。
+- 通知：出口 IP、节点或 DNS 的异常会汇总为一条“核心网络”通知；关键服务连续两次检测失败才通知；恢复正常后通知一次。状态保存在 Surge 的持久化存储中，避免刷新时反复通知。
+- DNS：Panel 只读取网络状态并访问 DoH 端点做可达性检测，不会修改 `dns-server`、`encrypted-dns-server`、DNS 劫持、DoH/DoQ、IPv6 或 TikTok 分流。
+
+旧的单项脚本仍保留在 `Scripts/` 供排障或二次开发参考，但不再由 Main.conf 或 `NetworkTools.sgmodule` 注入为日常手动入口。`Debug.sgmodule` 继续保留“异常通知测试”，仅在排障时启用。
+
+官方参考：
+
+- https://manual.nssurge.com/others/panel.html
+- https://manual.nssurge.com/scripting/common.html
+- https://manual.nssurge.com/others/http-api.html
 
 ## 安全与维护
 

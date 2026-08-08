@@ -1,8 +1,5 @@
-#!name=网络诊断工具
-#!desc=提供出口 IP、策略健康与网络信息的手动脚本入口。
+#!name=网络诊断工具（已内置）
+#!desc=网络诊断 Panel 已内置于 Config/Main.conf。本兼容模块不再注入旧的手动脚本，保留它可使已订阅用户在更新后自动移除旧入口。
 
-[Script]
-出口 IP 检查 = type=generic,script-path=https://raw.githubusercontent.com/Lin0323/surge-rules/main/Scripts/IPCheck.js,script-update-interval=86400
-节点健康检查 = type=generic,script-path=https://raw.githubusercontent.com/Lin0323/surge-rules/main/Scripts/NodeHealth.js,script-update-interval=86400
-网络信息 = type=generic,script-path=https://raw.githubusercontent.com/Lin0323/surge-rules/main/Scripts/NetworkInfo.js,script-update-interval=86400
-服务连通性检查 = type=generic,script-path=https://raw.githubusercontent.com/Lin0323/surge-rules/main/Scripts/ServiceHealth.js,script-update-interval=86400
+[Panel]
+# 兼容占位：功能由 Main.conf 的“网络诊断”Panel 提供，避免重复显示。
