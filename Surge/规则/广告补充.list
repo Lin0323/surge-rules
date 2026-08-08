@@ -1,0 +1,16 @@
+# 保守广告与追踪域名补充。基础大规则见主规则中的 Advertising.list。
+DOMAIN-SUFFIX,doubleclick.net
+DOMAIN-SUFFIX,googlesyndication.com
+DOMAIN-SUFFIX,googleadservices.com
+DOMAIN-SUFFIX,adservice.google.com
+DOMAIN-SUFFIX,adnxs.com
+DOMAIN-SUFFIX,adsrvr.org
+DOMAIN-SUFFIX,criteo.com
+DOMAIN-SUFFIX,criteo.net
+DOMAIN-SUFFIX,taboola.com
+DOMAIN-SUFFIX,outbrain.com
+DOMAIN-SUFFIX,scorecardresearch.com
+DOMAIN-SUFFIX,moatads.com
+DOMAIN-SUFFIX,demdex.net
+DOMAIN-SUFFIX,quantserve.com
+DOMAIN-SUFFIX,serving-sys.com
