@@ -1,9 +1,9 @@
 /*
- * Surge generic script: 测试主策略组 Proxy 与备用策略组 Backup 的可达性。
+ * Surge generic script: 测试 Auto、Proxy 与 Backup 策略组的延迟和可达性。
  * Surge 脚本无法安全地从通用配置枚举每一个私有节点，因此按策略组测试。
  */
 const testURL = "https://cp.cloudflare.com/generate_204";
-const policies = ["Proxy", "Backup"];
+const policies = ["Auto", "Proxy", "Backup"];
 const results = [];
 let pending = policies.length;
 

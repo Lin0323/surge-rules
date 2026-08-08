@@ -13,6 +13,9 @@ ROOT = Path(__file__).resolve().parents[1]
 RULES = ROOT / "Rules"
 MODULES = ROOT / "Modules"
 MAIN = ROOT / "Config" / "Main.conf"
+NODES = ROOT / "Nodes"
+SUBSCRIPTION = ROOT / "Subscription"
+SERVER = ROOT / "Server"
 REQUIRED_SECTIONS = ("[General]", "[Proxy]", "[Proxy Group]", "[Rule]", "[DNS]", "[Script]", "[MITM]")
 RULE_PREFIXES = {"DOMAIN", "DOMAIN-SUFFIX", "DOMAIN-KEYWORD", "IP-CIDR", "IP-CIDR6", "GEOIP", "USER-AGENT", "URL-REGEX"}
 
@@ -60,6 +63,23 @@ def check_main(errors: list[str]) -> None:
             errors.append(f"主配置疑似包含敏感字段：{item}")
 
 
+def check_node_layer(errors: list[str]) -> None:
+    required = (
+        NODES / "README.md",
+        NODES / "本地节点模板.conf",
+        SUBSCRIPTION / "generate-surge-subscription.sh",
+        SUBSCRIPTION / "订阅安全说明.md",
+        SERVER / "deploy-shadowtls.sh",
+        SERVER / "deploy-anytls.sh",
+        SERVER / "deploy-hysteria2.sh",
+        SERVER / "deploy-snell.sh",
+        SERVER / "lib" / "common.sh",
+    )
+    for path in required:
+        if not path.is_file() or not path.read_text(encoding="utf-8").strip():
+            errors.append(f"节点管理文件缺失或为空：{path.relative_to(ROOT)}")
+
+
 def check_urls(errors: list[str]) -> None:
     sources = list(ROOT.rglob("*.conf")) + list(ROOT.rglob("*.sgmodule"))
     urls: set[str] = set()
@@ -83,6 +103,7 @@ def main() -> int:
     check_rules(errors)
     check_modules(errors)
     check_main(errors)
+    check_node_layer(errors)
     if not args.skip_urls:
         check_urls(errors)
     if errors:

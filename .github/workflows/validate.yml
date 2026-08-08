@@ -19,3 +19,6 @@ jobs:
           python-version: "3.12"
       - name: Validate rules, modules and URLs
         run: python Scripts/验证配置.py
+      - name: Check deployment script syntax
+        shell: bash
+        run: bash -n Server/*.sh Server/lib/*.sh Subscription/*.sh

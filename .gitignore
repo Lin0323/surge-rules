@@ -5,3 +5,6 @@ Config/*.private.conf
 *.secret
 *.key
 *.pem
+Subscription/Surge.conf
+Subscription/*.private.conf
+Nodes/*.env
