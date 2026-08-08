@@ -1,0 +1,5 @@
+#!name=AI 分流
+#!desc=将常见 AI 服务交给 AI 策略组；启用前确认主配置存在 AI 策略组。
+
+[Rule]
+RULE-SET,https://raw.githubusercontent.com/Lin0323/surge-rules/main/Rules/AI.list,AI

@@ -1,0 +1,9 @@
+# Apple 服务：由 Apple 策略组处理；推送服务不在此列表中，避免影响通知。
+DOMAIN-SUFFIX,apple.com
+DOMAIN-SUFFIX,icloud.com
+DOMAIN-SUFFIX,apple-dns.net
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN-SUFFIX,apple-cloudkit.com
+DOMAIN-SUFFIX,apps.apple.com
+DOMAIN-SUFFIX,appstore.com
+DOMAIN-SUFFIX,apple.news

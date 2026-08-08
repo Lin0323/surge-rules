@@ -1,0 +1,12 @@
+# AI 服务：由 AI 策略组处理
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,cursor.com
+DOMAIN-SUFFIX,perplexity.ai
+DOMAIN-SUFFIX,cohere.com

@@ -1,2 +1,7 @@
 .DS_Store
 Thumbs.db
+Config/本地节点.conf
+Config/*.private.conf
+*.secret
+*.key
+*.pem

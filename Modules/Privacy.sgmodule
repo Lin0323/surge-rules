@@ -1,0 +1,6 @@
+#!name=隐私与广告控制
+#!desc=启用轻量广告与追踪域名拦截；不需要 MITM。
+
+[Rule]
+RULE-SET,https://raw.githubusercontent.com/Lin0323/surge-rules/main/Rules/Reject.list,REJECT
+RULE-SET,https://raw.githubusercontent.com/Lin0323/surge-rules/main/Rules/Advertising.list,REJECT

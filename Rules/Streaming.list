@@ -1,0 +1,13 @@
+# 海外流媒体：由 Media 策略组处理
+DOMAIN-SUFFIX,youtube.com
+DOMAIN-SUFFIX,googlevideo.com
+DOMAIN-SUFFIX,ytimg.com
+DOMAIN-SUFFIX,netflix.com
+DOMAIN-SUFFIX,nflxvideo.net
+DOMAIN-SUFFIX,nflximg.net
+DOMAIN-SUFFIX,disneyplus.com
+DOMAIN-SUFFIX,bamgrid.com
+DOMAIN-SUFFIX,primevideo.com
+DOMAIN-SUFFIX,hbomax.com
+DOMAIN-SUFFIX,hulu.com
+DOMAIN-SUFFIX,spotify.com

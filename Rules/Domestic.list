@@ -1,0 +1,13 @@
+# 常用国内服务：直连
+DOMAIN-SUFFIX,qq.com
+DOMAIN-SUFFIX,weixin.qq.com
+DOMAIN-SUFFIX,alipay.com
+DOMAIN-SUFFIX,taobao.com
+DOMAIN-SUFFIX,tmall.com
+DOMAIN-SUFFIX,jd.com
+DOMAIN-SUFFIX,bilibili.com
+DOMAIN-SUFFIX,douyin.com
+DOMAIN-SUFFIX,163.com
+DOMAIN-SUFFIX,zhihu.com
+DOMAIN-SUFFIX,baidu.com
+DOMAIN-SUFFIX,aliyun.com

@@ -1,0 +1,8 @@
+#!name=调试工具（默认不启用）
+#!desc=仅排障时启用：提高日志级别并加载异常通知测试。正常使用请保持关闭。
+
+[General]
+loglevel = verbose
+
+[Script]
+异常通知测试 = type=generic,script-path=https://raw.githubusercontent.com/Lin0323/surge-rules/main/Scripts/Notify.js,script-update-interval=86400,debug=true

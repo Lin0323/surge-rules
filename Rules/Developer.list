@@ -1,0 +1,14 @@
+# 开发资源：由 Developer 策略组处理
+DOMAIN-SUFFIX,github.com
+DOMAIN-SUFFIX,githubusercontent.com
+DOMAIN-SUFFIX,githubassets.com
+DOMAIN-SUFFIX,gitlab.com
+DOMAIN-SUFFIX,bitbucket.org
+DOMAIN-SUFFIX,docker.com
+DOMAIN-SUFFIX,docker.io
+DOMAIN-SUFFIX,npmjs.com
+DOMAIN-SUFFIX,npmmirror.com
+DOMAIN-SUFFIX,pypi.org
+DOMAIN-SUFFIX,pythonhosted.org
+DOMAIN-SUFFIX,packages.microsoft.com
+DOMAIN-SUFFIX,registry.npmjs.org

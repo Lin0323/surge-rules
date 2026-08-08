@@ -1,0 +1,9 @@
+# 已知遥测、恶意软件与不必要追踪端点：拒绝
+DOMAIN-SUFFIX,app-measurement.com
+DOMAIN-SUFFIX,google-analytics.com
+DOMAIN-SUFFIX,googletagmanager.com
+DOMAIN-SUFFIX,doubleclick.net
+DOMAIN-SUFFIX,scorecardresearch.com
+DOMAIN-SUFFIX,branch.io
+DOMAIN-SUFFIX,adjust.com
+DOMAIN-SUFFIX,appsflyer.com

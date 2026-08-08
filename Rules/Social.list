@@ -1,0 +1,15 @@
+# 海外社交与通讯：由 Proxy 策略组处理
+DOMAIN-SUFFIX,telegram.org
+DOMAIN-SUFFIX,t.me
+DOMAIN-SUFFIX,telegram.me
+DOMAIN-SUFFIX,x.com
+DOMAIN-SUFFIX,twitter.com
+DOMAIN-SUFFIX,twimg.com
+DOMAIN-SUFFIX,facebook.com
+DOMAIN-SUFFIX,fbcdn.net
+DOMAIN-SUFFIX,instagram.com
+DOMAIN-SUFFIX,threads.net
+DOMAIN-SUFFIX,tiktok.com
+DOMAIN-SUFFIX,tiktokv.com
+DOMAIN-SUFFIX,whatsapp.com
+DOMAIN-SUFFIX,whatsapp.net

@@ -1,0 +1,5 @@
+#!name=开发资源分流
+#!desc=将 GitHub、GitLab、包管理和云开发服务交给 Developer 策略组。
+
+[Rule]
+RULE-SET,https://raw.githubusercontent.com/Lin0323/surge-rules/main/Rules/Developer.list,Developer

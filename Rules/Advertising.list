@@ -1,0 +1,11 @@
+# 保守广告域名补充。应用异常时先查看 Surge 日志，再删除对应条目。
+DOMAIN-SUFFIX,adservice.google.com
+DOMAIN-SUFFIX,adnxs.com
+DOMAIN-SUFFIX,adsrvr.org
+DOMAIN-SUFFIX,criteo.com
+DOMAIN-SUFFIX,criteo.net
+DOMAIN-SUFFIX,moatads.com
+DOMAIN-SUFFIX,taboola.com
+DOMAIN-SUFFIX,outbrain.com
+DOMAIN-SUFFIX,smartadserver.com
+DOMAIN-SUFFIX,quantserve.com
