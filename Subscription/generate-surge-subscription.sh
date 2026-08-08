@@ -50,14 +50,14 @@ policies=()
   for policy in "${policies[@]}"; do
     printf ', %s' "$policy"
   done
-  printf '%s\n' ", url=https://cp.cloudflare.com/generate_204, interval=600, tolerance=100, timeout=8, evaluate-before-use=true"
+  printf '%s\n' ", url=http://www.gstatic.com/generate_204, interval=600, tolerance=100, timeout=8, evaluate-before-use=true"
   cat <<'EOF'
 Proxy = select, Auto, DIRECT
 AI = select, Proxy, DIRECT
 Media = select, Proxy, DIRECT
 Developer = select, Proxy, DIRECT
 Apple = select, Proxy, DIRECT
-Backup = fallback, Auto, DIRECT, url=https://cp.cloudflare.com/generate_204, interval=600, timeout=8
+Backup = fallback, Auto, DIRECT, url=http://www.gstatic.com/generate_204, interval=600, timeout=8
 EOF
 } >"$tmp"
 
