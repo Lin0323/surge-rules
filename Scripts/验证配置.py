@@ -6,6 +6,7 @@ import argparse
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -86,11 +87,37 @@ def check_urls(errors: list[str]) -> None:
     for path in sources:
         urls.update(re.findall(r"https://[^,\s]+", path.read_text(encoding="utf-8")))
     for url in sorted(urls):
-        request = urllib.request.Request(url, method="HEAD", headers={"User-Agent": "surge-project-validator"})
+        # 配置中的 RULE-SET 可以使用中文目录名；urllib 只接受 ASCII URL，
+        # 因此请求前保留协议分隔符并对路径中的非 ASCII 字符做百分号编码。
+        encoded_url = urllib.parse.quote(url, safe=":/?&=#%")
+        parsed = urllib.parse.urlsplit(encoded_url)
+
+        # DoH 地址不是普通网页。没有携带 DNS 查询报文时，符合规范的服务会返回
+        # HTTP 400；对它发送 HEAD/GET 反而会把有效的 Surge 配置误判为失效。
+        if parsed.scheme == "https" and parsed.netloc and parsed.path.rstrip("/").endswith("/dns-query"):
+            continue
+
+        request = urllib.request.Request(encoded_url, method="HEAD", headers={"User-Agent": "surge-project-validator"})
         try:
             with urllib.request.urlopen(request, timeout=15) as response:
                 if response.status >= 400:
                     errors.append(f"URL 无效：{url}（HTTP {response.status}）")
+        except urllib.error.HTTPError as exc:
+            # 少数静态托管站点禁用 HEAD；使用极小范围的 GET 再确认一次。
+            if exc.code not in (405, 501):
+                errors.append(f"URL 无法访问：{url}（HTTP {exc.code}）")
+                continue
+            fallback = urllib.request.Request(
+                encoded_url,
+                method="GET",
+                headers={"User-Agent": "surge-project-validator", "Range": "bytes=0-0"},
+            )
+            try:
+                with urllib.request.urlopen(fallback, timeout=15) as response:
+                    if response.status >= 400:
+                        errors.append(f"URL 无效：{url}（HTTP {response.status}）")
+            except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, ValueError) as fallback_exc:
+                errors.append(f"URL 无法访问：{url}（{fallback_exc}）")
         except (urllib.error.URLError, TimeoutError, ValueError) as exc:
             errors.append(f"URL 无法访问：{url}（{exc}）")
 
