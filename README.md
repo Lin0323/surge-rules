@@ -19,11 +19,11 @@
 1. 在 iPhone Safari 打开主入口 Raw 链接：<https://raw.githubusercontent.com/Lin0323/surge-rules/main/Config/Main.conf>，选择“在 Surge 中打开”。
 2. 此入口不包含任何节点。首次导入后 Auto 只有 DIRECT，是为了保证配置可以安全导入。
 3. 从你的私有订阅导入节点，或仅在本机添加节点；绝不把真实 Proxy 配置回传到仓库。
-4. 在策略组中把真实节点名称加入 Auto，并删除 Auto 中的 DIRECT。Auto 会通过 Cloudflare 204 测试自动选择延迟最低的可用节点。
+4. 在策略组中通过 Auto 或 Backup 手动选择已导入的真实节点。保留 DIRECT 可在节点不可用时临时直连。
 
 Auto、Proxy、AI、Media、Developer、Apple、Backup 的用途如下：
 
-- Auto：逐节点测速并自动选择。
+- Auto：手动选择已导入节点。
 - 外部节点：已提供 `policy-path` 输入位。搜索 `xxxxxxx`，将 `https://xxxxxxx.invalid/surge-external-proxies.list` 整段替换为你的私有 Surge 外部代理列表 URL；更新后节点会纳入该策略组。真实 URL 不写入 GitHub。
 - Proxy：默认海外流量入口，可选择 Auto、外部节点或 DIRECT。
 - AI：ChatGPT、Claude、Gemini、Cursor 等。
@@ -31,7 +31,7 @@ Auto、Proxy、AI、Media、Developer、Apple、Backup 的用途如下：
 - Developer：GitHub、GitLab、Docker、NPM、PyPI 等。
 - Apple：Apple 服务的独立出口选择。
 - Spotify：Spotify 的独立出口选择，可手动选择 Proxy 或 DIRECT。
-- Backup：主策略不可用时的回退策略。
+- Backup：手动选择备用节点；可选择 Auto、外部节点、DIRECT 或任一已导入节点。
 
 ## VPS 节点生成
 
