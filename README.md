@@ -80,3 +80,9 @@ VLESS Reality 保持现有配置，不由这些脚本修改；Surge iOS 没有 V
 - 修改后运行 python Scripts/验证配置.py --skip-urls 做静态检查；完整 URL 检查使用 python Scripts/验证配置.py。
 - GitHub Actions 还会检查规则格式、重复规则、空文件、模块元数据、URL 和 Shell 语法。
 - 广告拦截不能保证覆盖所有应用内广告；异常时应先查看 Surge 日志，再谨慎调整规则。
+
+## 手动安装模块
+
+- YouTube 去广告（独立模块，不会改动主配置）：`https://raw.githubusercontent.com/Lin0323/surge-rules/main/Modules/YouTubeAdBlock.sgmodule`
+
+模块已内置规则、重写和 MITM 主机名。首次使用前仍须在 Surge 启用 HTTPS 解密并安装、信任 Surge 证书；详情见模块说明。
