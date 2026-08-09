@@ -1,0 +1,8 @@
+# Ookla Speedtest 与常见自建 Speedtest 服务走 Proxy。
+DOMAIN-SUFFIX,speedtest.net
+DOMAIN-SUFFIX,ookla.com
+DOMAIN-SUFFIX,ooklaserver.net
+DOMAIN-SUFFIX,speedtestcustom.com
+DOMAIN-SUFFIX,speedtest.cn
+DOMAIN-SUFFIX,openspeedtest.com
+DOMAIN-SUFFIX,fast.com
