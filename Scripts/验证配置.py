@@ -79,6 +79,10 @@ def check_main(errors: list[str]) -> None:
         errors.append("Spotify 独立策略组缺失或未同时提供 Proxy 与 DIRECT")
     if "Rules/Spotify.list,Spotify" not in text:
         errors.append("Spotify 规则集引用缺失")
+    if not re.search(r"^外部节点\s*=\s*select,\s*DIRECT,\s*include-all-proxies=true", text, re.M):
+        errors.append("外部节点策略组缺失或未启用本机代理纳入")
+    if not re.search(r"^Proxy\s*=\s*select,\s*Auto,\s*外部节点,\s*DIRECT", text, re.M):
+        errors.append("总 Proxy 策略组未纳入外部节点")
 
 
 def check_scripts(errors: list[str]) -> None:

@@ -24,7 +24,8 @@
 Auto、Proxy、AI、Media、Developer、Apple、Backup 的用途如下：
 
 - Auto：逐节点测速并自动选择。
-- Proxy：默认海外流量入口，默认选择 Auto。
+- 外部节点：用于导入私有 Surge 外部代理列表；在 Surge 的“外部代理”入口粘贴列表 URL，节点会纳入该策略组。真实 URL 不写入 GitHub。
+- Proxy：默认海外流量入口，可选择 Auto、外部节点或 DIRECT。
 - AI：ChatGPT、Claude、Gemini、Cursor 等。
 - Media：YouTube、Netflix、Disney+、Max、Prime Video、Twitch 等。
 - Developer：GitHub、GitLab、Docker、NPM、PyPI 等。
