@@ -73,6 +73,12 @@ def check_main(errors: list[str]) -> None:
     for item in forbidden_general:
         if item.casefold() in text.casefold():
             errors.append(f"主配置包含不应由 Panel 引入的网络改动：{item}")
+    if re.search(r"^\s*encrypted-dns-server\s*=", text, re.M | re.I):
+        errors.append("主配置仍包含已禁用的 encrypted-dns-server")
+    if not re.search(r"^Spotify\s*=\s*select,\s*Proxy,\s*DIRECT", text, re.M):
+        errors.append("Spotify 独立策略组缺失或未同时提供 Proxy 与 DIRECT")
+    if "Rules/Spotify.list,Spotify" not in text:
+        errors.append("Spotify 规则集引用缺失")
 
 
 def check_scripts(errors: list[str]) -> None:
@@ -85,7 +91,7 @@ def check_scripts(errors: list[str]) -> None:
         "policy: proxyGroup",
         "api.ip.sb/geoip",
         "cp.cloudflare.com/generate_204",
-        "cloudflare-dns.com/dns-query",
+        "resolverState()",
         "$persistentStore",
         "$notification.post",
         "$done({",
@@ -93,6 +99,24 @@ def check_scripts(errors: list[str]) -> None:
     for token in required_tokens:
         if token not in text:
             errors.append(f"Panel 脚本缺少关键能力：{token}")
+
+
+def check_rule_coverage(errors: list[str]) -> None:
+    expected = {
+        "AI.list": ("openai.com", "anthropic.com", "cursor.com", "mistral.ai"),
+        "Social.list": ("tiktokcdn.com", "byteoversea.com", "telegram-cdn.org", "discord.com"),
+        "Streaming.list": ("youtube.com", "netflix.com", "disneyplus.com", "twitch.tv"),
+        "Spotify.list": ("spotify.com", "scdn.co", "spoti.fi"),
+    }
+    for filename, domains in expected.items():
+        path = RULES / filename
+        if not path.is_file():
+            errors.append(f"规则集缺失：Rules/{filename}")
+            continue
+        content = path.read_text(encoding="utf-8")
+        for domain in domains:
+            if domain not in content:
+                errors.append(f"规则集覆盖不完整：{filename} 缺少 {domain}")
 
 
 def check_node_layer(errors: list[str]) -> None:
@@ -162,6 +186,7 @@ def main() -> int:
     check_modules(errors)
     check_main(errors)
     check_scripts(errors)
+    check_rule_coverage(errors)
     check_node_layer(errors)
     if not args.skip_urls:
         check_urls(errors)

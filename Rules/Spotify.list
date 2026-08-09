@@ -1,0 +1,9 @@
+# Spotify：独立由 Spotify 策略组处理，可在 Surge 中选择 Proxy 或 DIRECT。
+DOMAIN-SUFFIX,spotify.com
+DOMAIN-SUFFIX,spotify.net
+DOMAIN-SUFFIX,spotifycdn.com
+DOMAIN-SUFFIX,spotifycharts.com
+DOMAIN-SUFFIX,spotifyforartists.com
+DOMAIN-SUFFIX,scdn.co
+DOMAIN-SUFFIX,pscdn.co
+DOMAIN-SUFFIX,spoti.fi

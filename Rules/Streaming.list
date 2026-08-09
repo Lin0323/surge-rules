@@ -1,13 +1,34 @@
-# 海外流媒体：由 Media 策略组处理
+# 海外流媒体：由 Media 策略组处理。Spotify 单独由 Spotify 策略组处理。
 DOMAIN-SUFFIX,youtube.com
+DOMAIN-SUFFIX,youtu.be
 DOMAIN-SUFFIX,googlevideo.com
 DOMAIN-SUFFIX,ytimg.com
+DOMAIN-SUFFIX,youtube-nocookie.com
 DOMAIN-SUFFIX,netflix.com
+DOMAIN-SUFFIX,netflix.net
 DOMAIN-SUFFIX,nflxvideo.net
 DOMAIN-SUFFIX,nflximg.net
+DOMAIN-SUFFIX,nflximg.com
+DOMAIN-SUFFIX,nflxso.net
+DOMAIN-SUFFIX,nflxext.com
 DOMAIN-SUFFIX,disneyplus.com
+DOMAIN-SUFFIX,disney-plus.net
+DOMAIN-SUFFIX,disneyplus.net
 DOMAIN-SUFFIX,bamgrid.com
 DOMAIN-SUFFIX,primevideo.com
+DOMAIN-SUFFIX,amazonvideo.com
+DOMAIN-SUFFIX,aiv-cdn.net
+DOMAIN-SUFFIX,media-amazon.com
 DOMAIN-SUFFIX,hbomax.com
+DOMAIN-SUFFIX,max.com
+DOMAIN-SUFFIX,hbo.com
+DOMAIN-SUFFIX,hbogo.com
 DOMAIN-SUFFIX,hulu.com
-DOMAIN-SUFFIX,spotify.com
+DOMAIN-SUFFIX,huluim.com
+DOMAIN-SUFFIX,hulustream.com
+DOMAIN-SUFFIX,twitch.tv
+DOMAIN-SUFFIX,ttvnw.net
+DOMAIN-SUFFIX,jtvnw.net
+DOMAIN-SUFFIX,paramountplus.com
+DOMAIN-SUFFIX,cbsivideo.com
+DOMAIN-SUFFIX,peacocktv.com

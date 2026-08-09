@@ -188,20 +188,16 @@ async function run() {
   const probes = await Promise.all([
     getExitInfo(),
     request({ url: "https://cp.cloudflare.com/generate_204", policy: proxyGroup, timeout }),
-    request({
-      url: "https://cloudflare-dns.com/dns-query?name=www.cloudflare.com&type=A",
-      headers: { Accept: "application/dns-json" },
-      policy: proxyGroup,
-      timeout,
-    }),
     request({ url: "https://www.google.com/generate_204", policy: proxyGroup, timeout }),
     request({ url: "https://www.tiktok.com/", policy: proxyGroup, timeout }),
     request({ url: "https://chatgpt.com/", policy: proxyGroup, timeout }),
     currentPolicy(),
   ]);
-  const [exit, nodeProbe, dnsProbe, googleProbe, tiktokProbe, chatgptProbe, policyName] = probes;
+  const [exit, nodeProbe, googleProbe, tiktokProbe, chatgptProbe, policyName] = probes;
   const nodeOK = is204(nodeProbe);
-  const dnsOK = isReachable(dnsProbe);
+  // Keep DNS diagnostics read-only. Do not issue DoH/DoQ probes or alter the
+  // resolver path: the current network DNS state is the only DNS signal here.
+  const dnsOK = resolverState() !== "未读取";
   const googleOK = isReachable(googleProbe);
   const tiktokOK = isReachable(tiktokProbe);
   const chatgptOK = isReachable(chatgptProbe);
@@ -222,7 +218,7 @@ async function run() {
     state,
     "核心网络",
     coreFailures.length === 0,
-    coreFailures.length ? "检测异常：" + coreFailures.join("、") : "出口 IP、节点连通与 DNS 已恢复",
+    coreFailures.length ? "检测异常：" + coreFailures.join("、") : "出口 IP、节点连通与 DNS 状态已恢复",
     1
   ));
   notifications = notifications.concat(updateStatus(
