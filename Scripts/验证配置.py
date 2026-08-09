@@ -79,8 +79,8 @@ def check_main(errors: list[str]) -> None:
         errors.append("Spotify 独立策略组缺失或未同时提供 Proxy 与 DIRECT")
     if "Rules/Spotify.list,Spotify" not in text:
         errors.append("Spotify 规则集引用缺失")
-    if not re.search(r"^外部节点\s*=\s*select,\s*DIRECT,\s*include-all-proxies=true", text, re.M):
-        errors.append("外部节点策略组缺失或未启用本机代理纳入")
+    if not re.search(r"^外部节点\s*=\s*select,\s*DIRECT,\s*include-all-proxies=true,\s*policy-path=https://xxxxxxx\.invalid/surge-external-proxies\.list", text, re.M):
+        errors.append("外部节点策略组缺失或 policy-path 占位入口错误")
     if not re.search(r"^Proxy\s*=\s*select,\s*Auto,\s*外部节点,\s*DIRECT", text, re.M):
         errors.append("总 Proxy 策略组未纳入外部节点")
 
@@ -150,6 +150,10 @@ def check_urls(errors: list[str]) -> None:
         # 因此请求前保留协议分隔符并对路径中的非 ASCII 字符做百分号编码。
         encoded_url = urllib.parse.quote(url, safe=":/?&=#%")
         parsed = urllib.parse.urlsplit(encoded_url)
+
+        # 外部节点的 .invalid URL 是公开配置中的可搜索占位符，不是待访问的远程资源。
+        if parsed.netloc == "xxxxxxx.invalid":
+            continue
 
         # DoH 地址不是普通网页。没有携带 DNS 查询报文时，符合规范的服务会返回
         # HTTP 400；对它发送 HEAD/GET 反而会把有效的 Surge 配置误判为失效。
